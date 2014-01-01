@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_text
 
 import jsonfield
 
@@ -12,6 +12,9 @@ class Block(models.Model):
 
     def render(self):
         return self.template.markup.format(**self.context)
+    
+    def __str__(self):
+        return force_text(self.context)
 
 
 @python_2_unicode_compatible
